@@ -1,3 +1,6 @@
+#feito pelo aluno da faculdade CDL
+
+
 import psutil
 import customtkinter as ct
 import random
