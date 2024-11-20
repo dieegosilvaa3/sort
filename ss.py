@@ -7,7 +7,8 @@ import time
 ctk.set_appearance_mode("system")  # definir aparência da interface
 ctk.set_default_color_theme("dark-blue")  # definir cor da interface
 app = ctk.CTk()
-app.attributes("-fullscreen", True)  # definir a dimensão da interface
+app.geometry("1080x680")
+#app.attributes("-fullscreen", True)  # definir a dimensão da interface
 app.title("System Monitorator")  # definir título da interface
 app.resizable(False, False)  # impedir redimensionamento
 app.configure(fg_color="black")
@@ -48,61 +49,61 @@ cpu_label = ct.CTkLabel(app, text="0%", font=("Arial", 30), text_color="#F8F8FF"
 cpu_label.place(x=250, y=150)
 # RAM
 ram_title_label = ct.CTkLabel(app, text="Uso da RAM", font=("Arial", 30), text_color="#3CB371")
-ram_title_label.place(x=375, y=150)
+ram_title_label.place(x=400, y=150)
 ram_label = ct.CTkLabel(app, text="0%", font=("Arial", 30), text_color="#F8F8FF")
-ram_label.place(x=585, y=150)
+ram_label.place(x=610, y=150)
 # BUBBLE_SORT
 bubble_tittle = ct.CTkLabel(app, text="Bubble Sort", font=("Arial", 30), text_color="#FFD700")
 bubble_tittle.place(x=35, y=200)
 bubble_label = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
 bubble_label.place(x=250, y=200)
 bubble_cpu = ct.CTkLabel(app, text="CPU:", font=("Arial", 30), text_color="#FFD700")
-bubble_cpu.place(x=570, y=200)
+bubble_cpu.place(x=400, y=200)
 bubble_lacpu = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-bubble_lacpu.place(x=660, y=200)
+bubble_lacpu.place(x=490, y=200)
 bubble_ram = ct.CTkLabel(app, text="RAM:", font=("Arial", 30), text_color="#FFD700")
-bubble_ram.place(x=750, y=200)
+bubble_ram.place(x=570, y=200)
 bubble_laram = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-bubble_laram.place(x=840, y=200)
+bubble_laram.place(x=660, y=200)
 # SELECTION_SORT
 selection_tittle = ct.CTkLabel(app, text="Selection Sort", font=("Arial", 30), text_color="#836FFF")
 selection_tittle.place(x=35, y=250)
 selection_label = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
 selection_label.place(x=250, y=250)
 selection_cpu = ct.CTkLabel(app, text="CPU:", font=("Arial", 30), text_color="#836FFF")
-selection_cpu.place(x=570, y=250)
+selection_cpu.place(x=400, y=250)
 selection_lacpu = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-selection_lacpu.place(x=660, y=250)
+selection_lacpu.place(x=490, y=250)
 selection_ram = ct.CTkLabel(app, text="RAM:", font=("Arial", 30), text_color="#836FFF")
-selection_ram.place(x=750, y=250)
+selection_ram.place(x=570, y=250)
 selection_laram = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-selection_laram.place(x=840, y=250)
+selection_laram.place(x=660, y=250)
 # INSERTION_SORT
 insertion_tittle = ct.CTkLabel(app, text="Insertion Sort", font=("Arial", 30), text_color="#FF69B4")
 insertion_tittle.place(x=35, y=300)
 insertion_label = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
 insertion_label.place(x=250, y=300)
 insertion_cpu = ct.CTkLabel(app, text="CPU:", font=("Arial", 30), text_color="#FF69B4")
-insertion_cpu.place(x=570, y=300)
+insertion_cpu.place(x=400, y=300)
 insertion_lacpu = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-insertion_lacpu.place(x=660, y=300)
+insertion_lacpu.place(x=490, y=300)
 insertion_ram = ct.CTkLabel(app, text="RAM:", font=("Arial", 30), text_color="#FF69B4")
-insertion_ram.place(x=750, y=300)
+insertion_ram.place(x=570, y=300)
 insertion_laram = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-insertion_laram.place(x=840, y=300)
+insertion_laram.place(x=660, y=300)
 # QUICK_SORT
 quick_tittle = ct.CTkLabel(app, text="Quick Sort", font=("Arial", 30), text_color="#1E90FF")
 quick_tittle.place(x=35, y=350)
 quick_label = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
 quick_label.place(x=250, y=350)
 quick_cpu = ct.CTkLabel(app, text="CPU:", font=("Arial", 30), text_color="#1E90FF")
-quick_cpu.place(x=570, y=350)
+quick_cpu.place(x=400, y=350)
 quick_lacpu = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-quick_lacpu.place(x=660, y=350)
+quick_lacpu.place(x=490, y=350)
 quick_ram = ct.CTkLabel(app, text="RAM:", font=("Arial", 30), text_color="#1E90FF")
-quick_ram.place(x=750, y=350)
+quick_ram.place(x=570, y=350)
 quick_laram = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-quick_laram.place(x=840, y=350)
+quick_laram.place(x=660, y=350)
 # VETOR 
 vetor_tittle = ct.CTkLabel(app, text="Vetor:", font=("Arial", 30), text_color="#F8F8FF")
 vetor_tittle.place(x=35, y=100)
@@ -118,7 +119,7 @@ botao_reset.place(x=440, y=103)
 minimizar_button = ctk.CTkButton(app, text="Minimizar", font=("Arial", 20), command=lambda: app.iconify()) 
 minimizar_button.pack(pady=20)
 minimizar_button.place(x=600, y=103)
-
+# CPU_INSTRUÇÕES
 
 # Funções de ordenação
 def bubble_sort(arr):
@@ -182,7 +183,7 @@ def atualizar_dados():
     uso_ram = psutil.virtual_memory().percent  # Obter uso da RAM
     cpu_label.configure(text=f"{uso_cpu}%")  # Atualizar labels
     ram_label.configure(text=f"{uso_ram}%")  # Atualizar labels
-    app.after(500, atualizar_dados) 
+    app.after(500, atualizar_dados)
 
 atualizar_dados() # Inicia a atualização de dados e a interface gráfica
 monitor_uso() # Inicia o monitoramento de CPU e RAM
@@ -194,15 +195,15 @@ def medir_tempos(limite):
     vetor3 = vetor
     vetor4 = vetor
     global max_cpu, max_ram
-    
     if algoritmo_atual == 0:  # Bubble Sort
+        
         inicio1 = time.time()
         arr = vetor[:]
         bubble_sort(arr)
         fim1 = time.time()
         tempo1 = fim1 - inicio1
         print(f"Tempo de bubble_sort em execução: {tempo1} segundos")
-        bubble_label.configure(text=f"{tempo1:.4f}s")
+        bubble_label.configure(text=f"{tempo1:.3f}s")
         bubble_lacpu.configure(text=f"{max_cpu}%")
         bubble_laram.configure(text=f"{max_ram}%")
         vetor = 0
@@ -213,7 +214,7 @@ def medir_tempos(limite):
         fim = time.time()
         tempo = fim - inicio
         print(f"Tempo de selection_sort em execução: {tempo} segundos")
-        selection_label.configure(text=f"{tempo:.4f}s")
+        selection_label.configure(text=f"{tempo:.3f}s")
         selection_lacpu.configure(text=f"{max_cpu}%")
         selection_laram.configure(text=f"{max_ram}%")
         vetor2 = 0
@@ -224,7 +225,7 @@ def medir_tempos(limite):
         fim2 = time.time()
         tempo2 = fim2 - inicio2
         print(f"Tempo de insertion_sort em execução: {tempo2} segundos")
-        insertion_label.configure(text=f"{tempo2:.4f}s")
+        insertion_label.configure(text=f"{tempo2:.3f}s")
         insertion_lacpu.configure(text=f"{max_cpu}%")
         insertion_laram.configure(text=f"{max_ram}%")
         vetor3 = 0
@@ -235,7 +236,7 @@ def medir_tempos(limite):
         fim3 = time.time()
         tempo3 = fim3 - inicio3
         print(f"Tempo de Quick_sort em execução: {tempo3} segundos")
-        quick_label.configure(text=f"{tempo3:.4f}s")
+        quick_label.configure(text=f"{tempo3:.3f}s")
         quick_lacpu.configure(text=f"{max_cpu}%")
         quick_laram.configure(text=f"{max_ram}%")
         vetor4 = 0
