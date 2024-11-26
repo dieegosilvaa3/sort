@@ -3,6 +3,7 @@ import customtkinter as ct
 import customtkinter as ctk
 import random
 import time
+import sys # nesse algoritmo, a função sys.exit() retorna o fehcamento do mesmo.
 
 ctk.set_appearance_mode("system")  # definir aparência da interface
 ctk.set_default_color_theme("dark-blue")  # definir cor da interface
@@ -23,6 +24,11 @@ def alternar_algoritmo():
     print(f"Iniciando algoritmo: {algoritmo_atual}")
     limite = int(vetor_limite.get())  # Obtém o limite a partir da entrada do usuário
     medir_tempos(limite)
+def fechar():
+    global button
+    button = 0
+    if button == 0:
+        sys.exit()
 def resetar(): 
     global max_cpu, max_ram 
     max_cpu = 0 
@@ -119,6 +125,9 @@ botao_reset.place(x=440, y=103)
 minimizar_button = ctk.CTkButton(app, text="Minimizar", font=("Arial", 20), command=lambda: app.iconify()) 
 minimizar_button.pack(pady=20)
 minimizar_button.place(x=600, y=103)
+# BOTÃO_FECHAR
+fechar_button = ctk.CTkButton(app, text="Fechar", font=("Arial", 20), command=fechar)
+fechar_button.place(x=760, y=103)
 # CPU_INSTRUÇÕES
 
 # Funções de ordenação
@@ -170,20 +179,20 @@ def monitor_uso():
     global max_cpu, max_ram
     max_cpu = 0
     max_ram = 0
-    if max_cpu == 0 and max_ram == 0:
-        uso_cpu = psutil.cpu_percent() # Obter uso da CPU 
+    while max_cpu == 0 and max_ram == 0:
+        uso_cpu = psutil.cpu_percent(interval=0.0100) # Obter uso da CPU 
         uso_ram = psutil.virtual_memory().percent # Obter uso da RAM  
         max_cpu = max(max_cpu, uso_cpu) 
         max_ram = max(max_ram, uso_ram) 
-        app.after(100, monitor_uso) 
+        app.after(200, monitor_uso) 
 
 # Função para atualizar o uso de CPU e RAM
 def atualizar_dados():
-    uso_cpu = psutil.cpu_percent()  # Obter uso da CPU
+    uso_cpu = psutil.cpu_percent(interval=0)  # Obter uso da CPU
     uso_ram = psutil.virtual_memory().percent  # Obter uso da RAM
     cpu_label.configure(text=f"{uso_cpu}%")  # Atualizar labels
     ram_label.configure(text=f"{uso_ram}%")  # Atualizar labels
-    app.after(500, atualizar_dados)
+    app.after(200, atualizar_dados)
 
 atualizar_dados() # Inicia a atualização de dados e a interface gráfica
 monitor_uso() # Inicia o monitoramento de CPU e RAM
