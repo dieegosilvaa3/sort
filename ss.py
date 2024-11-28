@@ -1,19 +1,19 @@
-import psutil
-import customtkinter as ct
-import customtkinter as ctk
-import random
-import time
+import psutil # análise de dados (CPU e memória RAM)
+import customtkinter as ct  # customização
+import customtkinter as ctk # customização
+import random # número aleatórios 
+import time # medir tempo
 import sys # nesse algoritmo, a função sys.exit() retorna o fehcamento do mesmo.
-import threading
+import threading # em Python é utilizada para trabalhar com threads, que são uma forma de dividir a execução de um programa em múltiplas linhas de execução simultâneas.
 
 ctk.set_appearance_mode("system")  # definir aparência da interface
 ctk.set_default_color_theme("dark-blue")  # definir cor da interface
 app = ctk.CTk()
-app.geometry("1080x680")
+app.geometry("1080x680") # definir a dimensão da interface
 #app.attributes("-fullscreen", True)  # definir a dimensão da interface
 app.title("System Monitorator")  # definir título da interface
-app.resizable(False, False)  # impedir redimensionamento
-app.configure(fg_color="black")
+app.resizable(False, False)  # impedir redimensionamento livre
+app.configure(fg_color="black") # cor de fundo
 # Variável de controle para alternar entre os algoritmos
 algoritmo_atual = 0  # 0 - Bubble Sort, 1 - Selection Sort, 2 - Insertion Sort, 3 - Quick Sort
 max_cpu = 0
@@ -23,28 +23,28 @@ def alternar_algoritmo():
     global algoritmo_atual
     algoritmo_atual = (algoritmo_atual + 1) % 4  # Alterna entre 0, 1, 2, 3 (Bubble Sort, Selection Sort, Insertion Sort, Quick Sort)
     print(f"Iniciando algoritmo: {algoritmo_atual}")
-    threading.Thread(target=monitor_uso, daemon=True).start()
     limite = int(vetor_limite.get())  # Obtém o limite a partir da entrada do usuário
     medir_tempos(limite)
+    threading.Thread(target=monitor_uso, daemon=True).start()
 def fechar():
     global button
     button = 0
     if button == 0:
         sys.exit()
-def resetar(): 
-    global max_cpu, max_ram 
-    max_cpu = 0 
-    max_ram = 0 
-    bubble_lacpu.configure(text="--") 
-    bubble_laram.configure(text="--") 
+def resetar():
+    global max_cpu, max_ram
+    max_cpu = 0
+    max_ram = 0
+    bubble_lacpu.configure(text="--")
+    bubble_laram.configure(text="--")
     bubble_label.configure(text="--")
-    selection_lacpu.configure(text="--") 
+    selection_lacpu.configure(text="--")
     selection_laram.configure(text="--")
-    selection_label.configure(text="--") 
-    insertion_lacpu.configure(text="--") 
-    insertion_laram.configure(text="--") 
+    selection_label.configure(text="--")
+    insertion_lacpu.configure(text="--")
+    insertion_laram.configure(text="--")
     insertion_label.configure(text="--")
-    quick_lacpu.configure(text="--") 
+    quick_lacpu.configure(text="--")
     quick_laram.configure(text="--")
     quick_label.configure(text="--")
 # TÍTULO
@@ -54,7 +54,7 @@ label_titulo.place(x=300, y=25)
 cpu_title_label = ct.CTkLabel(app, text="Uso de CPU", font=("Arial", 30), text_color="#FF4500")
 cpu_title_label.place(x=35, y=150)
 cpu_label = ct.CTkLabel(app, text="0%", font=("Arial", 30), text_color="#F8F8FF")
-cpu_label.place(x=250, y=150)
+cpu_label.place(x=243, y=150)
 # RAM
 ram_title_label = ct.CTkLabel(app, text="Uso da RAM", font=("Arial", 30), text_color="#3CB371")
 ram_title_label.place(x=400, y=150)
@@ -70,9 +70,9 @@ bubble_cpu.place(x=400, y=200)
 bubble_lacpu = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
 bubble_lacpu.place(x=490, y=200)
 bubble_ram = ct.CTkLabel(app, text="RAM:", font=("Arial", 30), text_color="#FFD700")
-bubble_ram.place(x=570, y=200)
+bubble_ram.place(x=615, y=200)
 bubble_laram = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-bubble_laram.place(x=660, y=200)
+bubble_laram.place(x=705, y=200)
 # SELECTION_SORT
 selection_tittle = ct.CTkLabel(app, text="Selection Sort", font=("Arial", 30), text_color="#836FFF")
 selection_tittle.place(x=35, y=250)
@@ -83,9 +83,9 @@ selection_cpu.place(x=400, y=250)
 selection_lacpu = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
 selection_lacpu.place(x=490, y=250)
 selection_ram = ct.CTkLabel(app, text="RAM:", font=("Arial", 30), text_color="#836FFF")
-selection_ram.place(x=570, y=250)
+selection_ram.place(x=615, y=250)
 selection_laram = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-selection_laram.place(x=660, y=250)
+selection_laram.place(x=705, y=250)
 # INSERTION_SORT
 insertion_tittle = ct.CTkLabel(app, text="Insertion Sort", font=("Arial", 30), text_color="#FF69B4")
 insertion_tittle.place(x=35, y=300)
@@ -96,9 +96,9 @@ insertion_cpu.place(x=400, y=300)
 insertion_lacpu = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
 insertion_lacpu.place(x=490, y=300)
 insertion_ram = ct.CTkLabel(app, text="RAM:", font=("Arial", 30), text_color="#FF69B4")
-insertion_ram.place(x=570, y=300)
+insertion_ram.place(x=615, y=300)
 insertion_laram = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-insertion_laram.place(x=660, y=300)
+insertion_laram.place(x=705, y=300)
 # QUICK_SORT
 quick_tittle = ct.CTkLabel(app, text="Quick Sort", font=("Arial", 30), text_color="#1E90FF")
 quick_tittle.place(x=35, y=350)
@@ -109,10 +109,10 @@ quick_cpu.place(x=400, y=350)
 quick_lacpu = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
 quick_lacpu.place(x=490, y=350)
 quick_ram = ct.CTkLabel(app, text="RAM:", font=("Arial", 30), text_color="#1E90FF")
-quick_ram.place(x=570, y=350)
+quick_ram.place(x=615, y=350)
 quick_laram = ct.CTkLabel(app, text="--", font=("Arial", 30), text_color="#F8F8FF")
-quick_laram.place(x=660, y=350)
-# VETOR 
+quick_laram.place(x=705, y=350)
+# VETOR
 vetor_tittle = ct.CTkLabel(app, text="Vetor:", font=("Arial", 30), text_color="#F8F8FF")
 vetor_tittle.place(x=35, y=100)
 vetor_limite = ct.CTkEntry(app, placeholder_text="--", font=("Arial", 20)) # Campo de entrada para o limite do vetor
@@ -124,7 +124,7 @@ botao_ordenacao.place(x=280, y=103)
 botao_reset = ct.CTkButton(app, text="Resetar", font=("Arial", 20), command=resetar) # Botão para alternar os algoritmos
 botao_reset.place(x=440, y=103)
 # BOTÃO_MINIMIZAR
-minimizar_button = ctk.CTkButton(app, text="Minimizar", font=("Arial", 20), command=lambda: app.iconify()) 
+minimizar_button = ctk.CTkButton(app, text="Minimizar", font=("Arial", 20), command=lambda: app.iconify())
 minimizar_button.pack(pady=20)
 minimizar_button.place(x=600, y=103)
 # BOTÃO_FECHAR
@@ -159,7 +159,7 @@ def insertion_sort(array):
             indice -= 1
         array[indice + 1] = key
 
-def quick_sort(array):   
+def quick_sort(array):
     def quick_sort_helper(array, low, high):
         if low < high:
             pivot = partition(array, low, high)
@@ -176,17 +176,17 @@ def quick_sort(array):
         return i + 1
     quick_sort_helper(array, 0, len(array) - 1)
     return array
-    
-def monitor_uso(): 
+
+def monitor_uso():
     global max_cpu, max_ram
     max_cpu = 0
     max_ram = 0
     while True:
-        uso_cpu = psutil.cpu_percent(interval=1) # Obter uso da CPU 
-        uso_ram = psutil.virtual_memory().percent # Obter uso da RAM  
-        max_cpu = max(max_cpu, uso_cpu) 
-        max_ram = max(max_ram, uso_ram) 
-        #app.after(0.1, monitor_uso) 
+        uso_cpu = psutil.cpu_percent(interval=1) # Obter uso da CPU
+        uso_ram = psutil.virtual_memory().percent # Obter uso da RAM
+        max_cpu = max(max_cpu, uso_cpu)
+        max_ram = max(max_ram, uso_ram)
+        #app.after(0.1, monitor_uso)
         time.sleep(0.1)
 
 # Função para atualizar o uso de CPU e RAM
@@ -208,7 +208,7 @@ def medir_tempos(limite):
     vetor4 = vetor
     global max_cpu, max_ram
     if algoritmo_atual == 0:  # Bubble Sort
-        
+
         inicio1 = time.time()
         arr = vetor[:]
         bubble_sort(arr)
