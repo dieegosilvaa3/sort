@@ -4,6 +4,7 @@ import customtkinter as ctk
 import random
 import time
 import sys # nesse algoritmo, a função sys.exit() retorna o fehcamento do mesmo.
+import threading
 
 ctk.set_appearance_mode("system")  # definir aparência da interface
 ctk.set_default_color_theme("dark-blue")  # definir cor da interface
@@ -22,6 +23,7 @@ def alternar_algoritmo():
     global algoritmo_atual
     algoritmo_atual = (algoritmo_atual + 1) % 4  # Alterna entre 0, 1, 2, 3 (Bubble Sort, Selection Sort, Insertion Sort, Quick Sort)
     print(f"Iniciando algoritmo: {algoritmo_atual}")
+    threading.Thread(target=monitor_uso, daemon=True).start()
     limite = int(vetor_limite.get())  # Obtém o limite a partir da entrada do usuário
     medir_tempos(limite)
 def fechar():
@@ -158,19 +160,19 @@ def insertion_sort(array):
         array[indice + 1] = key
 
 def quick_sort(array):   
-    def quick_sort_helper(array, low, higt):
-        if low < higt:
-            pivot = partition(array, low, higt)
+    def quick_sort_helper(array, low, high):
+        if low < high:
+            pivot = partition(array, low, high)
             quick_sort_helper(array, low, pivot - 1)
-            quick_sort_helper(array, pivot + 1, higt)
-    def partition(array, low, higt):
-        pivot = array[higt]
+            quick_sort_helper(array, pivot + 1, high)
+    def partition(array, low, high):
+        pivot = array[high]
         i = low - 1
-        for j in range(low, higt):
+        for j in range(low, high):
             if array[j] <= pivot:
                 i += 1
                 array[i], array[j] = array[j], array[i]
-        array[i + 1], array[higt] = array[higt], array[i + 1]
+        array[i + 1], array[high] = array[high], array[i + 1]
         return i + 1
     quick_sort_helper(array, 0, len(array) - 1)
     return array
@@ -179,23 +181,24 @@ def monitor_uso():
     global max_cpu, max_ram
     max_cpu = 0
     max_ram = 0
-    while max_cpu == 0 and max_ram == 0:
-        uso_cpu = psutil.cpu_percent(interval=0.0100) # Obter uso da CPU 
+    while True:
+        uso_cpu = psutil.cpu_percent(interval=1) # Obter uso da CPU 
         uso_ram = psutil.virtual_memory().percent # Obter uso da RAM  
         max_cpu = max(max_cpu, uso_cpu) 
         max_ram = max(max_ram, uso_ram) 
-        app.after(200, monitor_uso) 
+        #app.after(0.1, monitor_uso) 
+        time.sleep(0.1)
 
 # Função para atualizar o uso de CPU e RAM
 def atualizar_dados():
-    uso_cpu = psutil.cpu_percent(interval=0)  # Obter uso da CPU
+    uso_cpu = psutil.cpu_percent(interval=0.1)  # Obter uso da CPU
     uso_ram = psutil.virtual_memory().percent  # Obter uso da RAM
-    cpu_label.configure(text=f"{uso_cpu}%")  # Atualizar labels
-    ram_label.configure(text=f"{uso_ram}%")  # Atualizar labels
-    app.after(200, atualizar_dados)
+    cpu_label.configure(text=f"{uso_cpu: .2f}%")  # Atualizar labels
+    ram_label.configure(text=f"{uso_ram: .2f}%")  # Atualizar labels
+    app.after(100, atualizar_dados)
 
 atualizar_dados() # Inicia a atualização de dados e a interface gráfica
-monitor_uso() # Inicia o monitoramento de CPU e RAM
+#monitor_uso() # Inicia o monitoramento de CPU e RAM
 # Função para medir e atualizar os tempos
 
 def medir_tempos(limite):
